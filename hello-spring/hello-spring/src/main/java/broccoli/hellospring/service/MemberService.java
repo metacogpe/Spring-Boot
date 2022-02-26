@@ -3,16 +3,21 @@ package broccoli.hellospring.service;
 import broccoli.hellospring.domain.Member;
 import broccoli.hellospring.repository.MemberRepository;
 import broccoli.hellospring.repository.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service  // 스프링 컨테이너에 아래의 MemberService를 등록하는 동작 수행
 public class MemberService {
 
 //    private final MemberRepository memberRepository = new MemoryMemberRepository();
+
     private final MemberRepository memberRepository;
 
     // constructor 생성방식으로 코드 변경 : DI 방식으로 외부에서 주입
+    @Autowired
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }

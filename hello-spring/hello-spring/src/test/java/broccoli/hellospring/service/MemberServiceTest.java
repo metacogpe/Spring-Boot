@@ -18,7 +18,7 @@ class MemberServiceTest {
     @BeforeEach  // 같은 MemoryMemberRepository 사용 방법
     public void beforeEach() {
         memberRepository = new MemoryMemberRepository();
-        memberService = new MemberService(memberRepository);  // 외부에서 주입 DI 
+        memberService = new MemberService(memberRepository);  // 외부에서 주입 DI
     }
 
     @AfterEach
