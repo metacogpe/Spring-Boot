@@ -14,10 +14,10 @@ public class JdbcMemberRepository implements MemberRepository {
         this.dataSource = dataSource;
     }
 
-    @Override
-    public void clearStore() {
-
-    }
+//    @Override
+//    public void clearStore() {
+//
+//    }
 
     @Override
     public Member save(Member member) {
@@ -27,8 +27,7 @@ public class JdbcMemberRepository implements MemberRepository {
         ResultSet rs = null;
         try {
             conn = getConnection();
-            pstmt = conn.prepareStatement(sql,
-                    Statement.RETURN_GENERATED_KEYS);
+            pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, member.getName());
             pstmt.executeUpdate();
             rs = pstmt.getGeneratedKeys();
@@ -93,6 +92,12 @@ public class JdbcMemberRepository implements MemberRepository {
             close(conn, pstmt, rs);
         }
     }
+
+    @Override
+    public void clearStore() {
+
+    }
+
     @Override
     public Optional<Member> findByName(String name) {
         String sql = "select * from member where name = ?";
