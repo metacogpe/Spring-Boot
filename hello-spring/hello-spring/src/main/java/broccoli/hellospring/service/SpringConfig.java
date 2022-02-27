@@ -1,6 +1,7 @@
 package broccoli.hellospring.service;
 
 import broccoli.hellospring.repository.JdbcMemberRepository;
+import broccoli.hellospring.repository.JdbcTemplateMemberRepository;
 import broccoli.hellospring.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -26,6 +27,7 @@ public class SpringConfig {
     @Bean // 스프링빈에 memberRepository 를 등록
     public MemberRepository memberRepository() {
 //        return new MemoryMemberRepository();   // 기존 방식 : DB 미연결
-        return new JdbcMemberRepository(dataSource);
+//        return new JdbcMemberRepository(dataSource);
+        return new JdbcTemplateMemberRepository(dataSource);
     }
 }
