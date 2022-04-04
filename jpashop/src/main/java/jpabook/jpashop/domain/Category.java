@@ -24,7 +24,7 @@ public class Category {
     private List<Item> items = new ArrayList<>();
 
     // 셀프로 양방향 관계 설정
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
     private Category parent;
 
@@ -34,9 +34,7 @@ public class Category {
 
     //==연관관계 메서드==//
     public void addChildCategory(Category child) {
-        this.child.add(child);
-        child.setParent(this);
+        this.child.add(child); // 부모 컬렉션에서도 정의하고
+        child.setParent(this); // 자식에서도 부모가 누구인지 설정
     }
-
-
 }

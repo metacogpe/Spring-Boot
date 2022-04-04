@@ -21,5 +21,5 @@ public class Member {
     private Address address;
 
     @OneToMany(mappedBy = "member") //한 명의 회원이 여러 개의 주문, Order테이블의 member필드로 매핑(읽기 전용이 됨)
-    private List<Order> orders = new ArrayList<>();
+    private List<Order> orders = new ArrayList<>();  // 컬렉션은 필드에서 바로 초기화 하는 것이 null문제에서 안전
 }
