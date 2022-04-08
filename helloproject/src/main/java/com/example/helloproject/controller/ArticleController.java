@@ -39,7 +39,7 @@ public class ArticleController {
         Article saved = articleRepository.save(article);
         log.info(saved.toString());
 //        System.out.println(saved.toString());
-        return "";
+        return "redirect:/articles/" + saved.getId();
     }
 
     @GetMapping("/articles/{id}") //{id}는 변하는 수를 의미, PatheVariable로 정의

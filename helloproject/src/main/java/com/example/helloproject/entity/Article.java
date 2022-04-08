@@ -1,6 +1,7 @@
 package com.example.helloproject.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 @AllArgsConstructor   // 리팩토링 개선
 @NoArgsConstructor    // default constructor 추가(롬복 활용성 : arg가 없는 생성자 생성)
 @ToString             // 리팩토링 개선
+@Getter
 public class Article {
 
     @Id // 대표값 지정
@@ -24,6 +26,11 @@ public class Article {
 
     @Column
     private String content;
+
+//    getter를 직접 작성하지 않고 롬복의 @Getter 사용함
+//    public Long getId() {
+//        return id;
+//    }
 
 //    public Article(Long id, String title, String content) {
 //        this.id = id;
