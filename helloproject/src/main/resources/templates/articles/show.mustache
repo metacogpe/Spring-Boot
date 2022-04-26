@@ -17,7 +17,10 @@
     {{/article}}
     </tbody>
 </table>
-<a href="/articles/{{id}}/edit">Edit</a>
+<a href="/articles/{{id}}/edit" class="btn btn-primary">Edit</a>
+<!--html에서 DELETE를 제공하지 않아, GET, a태그인 링크를 사용-->
+<a href="/articles/{{id}}/delete" class="btn btn-danger">Delete</a>
+
 <a href="/articles">Go to Article List</a>
 
 {{>layouts/footer}}
