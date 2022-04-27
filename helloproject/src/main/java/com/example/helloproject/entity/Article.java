@@ -7,7 +7,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
-@Entity  //DB가 해당 객체 인식이 가능!
+@Entity  //DB가 해당 객체 인식이 가능!(해당 클래스로 테이블 만들기)
 @AllArgsConstructor   // 리팩토링 개선
 @NoArgsConstructor    // default constructor 추가(롬복 활용성 : arg가 없는 생성자 생성)
 @ToString             // 리팩토링 개선
@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class Article {
 
     @Id // 대표값 지정
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.IDENTITY) //DB가 id를 자동 생성
     private Long id;
 
     @Column
