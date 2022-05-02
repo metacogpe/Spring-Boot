@@ -2,10 +2,14 @@ package com.example.helloproject.dto;
 
 import com.example.helloproject.entity.Article;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @AllArgsConstructor
 @ToString
+@NoArgsConstructor
+@Setter
 public class ArticleForm {
 
     private Long id;

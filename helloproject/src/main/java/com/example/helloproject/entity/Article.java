@@ -24,6 +24,14 @@ public class Article {
     @Column
     private String content;
 
+    public void patch(Article article) {
+        // 모든 정보를 보내지 않는 경우에도 동작하도록 아래의 코드 작성
+        if (article.title != null)
+            this.title = article.title;
+        if (article.content != null)
+            this.content = article.content;
+    }
+
 //    getter를 직접 작성하지 않고 롬복의 @Getter 사용함
 //    public Long getId() {
 //        return id;
