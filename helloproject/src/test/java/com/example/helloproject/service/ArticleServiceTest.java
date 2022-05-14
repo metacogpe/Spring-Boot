@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.transaction.TransactionScoped;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -55,6 +57,7 @@ class ArticleServiceTest {
     }
 
     @Test
+    @Transactional  // 생성/변경/삭제되는 경우에는 수행 후 롤백될 수 있도록 처리
     void create_성공____title과_content만_있는_dto_입력() {
         // 예상
         String title = "라라라라";
@@ -67,4 +70,48 @@ class ArticleServiceTest {
         assertEquals(expected.toString(), article.toString());
     }
 
+    @Test
+    @Transactional
+    void create_실패____id가_포함된_dto_입력() {
+        // 예상
+        String title = "라라라라";
+        String content = "4444";
+        ArticleForm dto = new ArticleForm(4L, title, content);
+        Article expected = null;
+        // 실제
+        Article article = articleService.create(dto);
+        // 비교
+        assertEquals(expected, article);
+
+    }
+
+    @Test
+    @Transactional
+    void update_성공____존재하는_id와_title_content가_있는_dto_입력() {
+    }
+
+    @Test
+    @Transactional
+    void update_성공____존재하는_id와_title만_있는_dto_입력() {
+    }
+
+    @Test
+    @Transactional
+    void update_실패____존재하는_않는_id의_dto_입력() {
+    }
+
+    @Test
+    @Transactional
+    void update_실패____id만_있는_dto_입력() {
+    }
+
+    @Test
+    @Transactional
+    void delete_실패____존재하는_id_입력() {
+    }
+
+    @Test
+    @Transactional
+    void delete_실패____존재하지_않는_id_입력() {
+    }
 }
