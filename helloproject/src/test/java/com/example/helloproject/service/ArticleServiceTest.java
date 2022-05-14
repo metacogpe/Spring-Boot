@@ -1,5 +1,6 @@
 package com.example.helloproject.service;
 
+import com.example.helloproject.dto.ArticleForm;
 import com.example.helloproject.entity.Article;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,4 +31,40 @@ class ArticleServiceTest {
         // 비교
         assertEquals(expected.toString(), articles.toString());
     }
+
+    @Test
+    void show_성공____존재하는_id_입력() {
+        // 예상
+        Long id = 1L;
+        Article expected = new Article(id, "가가가가", "1111");
+        // 실제
+        Article article = articleService.show(id);
+        // 비교
+        assertEquals(expected.toString(), article.toString());
+
+    }
+    @Test
+    void show_실패____존재하지_않는_id_입력() {
+        // 예상
+        Long id = -1L;
+        Article expected = null;
+        // 실제
+        Article article = articleService.show(id);
+        // 비교
+        assertEquals(expected, article);
+    }
+
+    @Test
+    void create_성공____title과_content만_있는_dto_입력() {
+        // 예상
+        String title = "라라라라";
+        String content = "4444";
+        ArticleForm dto = new ArticleForm(null, title, content);
+        Article expected = new Article(4L, title, content);
+        // 실제
+        Article article = articleService.create(dto);
+        // 비교
+        assertEquals(expected.toString(), article.toString());
+    }
+
 }
