@@ -1,12 +1,14 @@
 package com.example.helloproject.service;
 
 import com.example.helloproject.dto.CommentDto;
+import com.example.helloproject.entity.Article;
 import com.example.helloproject.entity.Comment;
 import com.example.helloproject.repository.ArticleRepository;
 import com.example.helloproject.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,10 +16,10 @@ import java.util.stream.Collectors;
 @Service  // 서비스 컨트롤러임을 선언
 public class CommentService {
     @Autowired  // 일꾼에게 시키기, Service의 보조일군인 Repository와 협업 : 코멘트레파지토리(댓글 데이터) 당겨와 주어야 함
-    private CommentRepository commentRepository;
+    private  CommentRepository commentRepository;
 
     @Autowired  // 일꾼에게 시키기, Service의 보조일군인 Repository와 협업 : 아티클레파지토리(아티클 데이터) 당겨와 주어야 함
-    private ArticleRepository articleRepository;
+    private  ArticleRepository articleRepository;
 
     // stream 문법으로 구현
     public List<CommentDto> comments(Long articleId) {
@@ -26,7 +28,6 @@ public class CommentService {
                 .stream()
                 .map(comment -> CommentDto.createCommentDto(comment))
                 .collect(Collectors.toList());
-
     }
     // for문을 사용하여 구현 시
 //    public List<CommentDto> comments(Long articleId) {
@@ -45,4 +46,19 @@ public class CommentService {
 //        return dtos;
 //
 //    }
+
+    @Transactional
+    public CommentDto create(Long articleId, CommentDto dto) {
+        // 게시글 조회 및 예외 발생
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(() -> new IllegalArgumentException("댓글 생성 실패! 대상 게시글이 없습니다."));
+        // 댓글 엔티티 생성
+        Comment comment = Comment.createComment(dto, article);
+        // 댓글 엔티티를 DB로 저장
+        Comment created = commentRepository.save(comment);
+        // DTO로 변경하여 반환
+        return CommentDto.createCommentDto(created);
+}
+
+
 }
