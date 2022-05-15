@@ -1,8 +1,10 @@
 package com.example.helloproject.controller;
 
 import com.example.helloproject.dto.ArticleForm;
+import com.example.helloproject.dto.CommentDto;
 import com.example.helloproject.entity.Article;
 import com.example.helloproject.repository.ArticleRepository;
+import com.example.helloproject.service.CommentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +21,10 @@ import java.util.List;
 public class ArticleController {
 
     @Autowired // 스프링 부트가 미리 생성해 놓은 객체를 가져다가 자동 연결해 줌 즉, DI!
-    private ArticleRepository articleRepository;  // new로 객체생성 불필요 (DI : 스프링 부투)
+    private ArticleRepository articleRepository;  // new로 객체생성 불필요 (DI : 스프링 부트)
+
+    @Autowired  // 아래와 같이 등록한 후에 당겨오기 -> commentService 사용가능
+    public CommentService commentService;  // 아래 show()에서 사용할 수 있도록 가져오기
 
     @GetMapping("/articles/new")
     public String newArticleForm() {
@@ -48,8 +53,10 @@ public class ArticleController {
         log.info("id = " + id);
         // 1: id로 데이터를 가져옴!
         Article articleEntity = articleRepository.findById(id).orElse(null);
+        List< CommentDto> commentDtos = commentService.comments(id);  // 위에서 commentService 등록하여 사용 가능
         // 2: 가져온 데이터를 모델에 등록!
         model.addAttribute("article",articleEntity);
+        model.addAttribute("commentDtos", commentDtos);
         // 3: 보여줄 페이지를 설정!
         return "articles/show";
     }
