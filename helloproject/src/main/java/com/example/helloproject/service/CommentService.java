@@ -72,4 +72,15 @@ public class CommentService {
         // 댓글 엔터티를 DTO로 변환 및 반환
         return CommentDto.createCommentDto(updated);
     }
+
+    @Transactional   // 잘못되었을 경우 롤백 발생 필요로 트랜잭션널
+    public CommentDto delete(Long id) {
+        // 댓글 조회(
+        Comment target = commentRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("댓글 삭제 실패! 대상이 없습니다. "));
+        // 댓글을 DB에서 삭제
+        commentRepository.delete(target);
+        // 삭제 댓글을 DTO로 반환
+        return CommentDto.createCommentDto(target);
+    }
 }
