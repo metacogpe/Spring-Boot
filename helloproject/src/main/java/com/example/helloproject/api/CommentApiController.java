@@ -38,8 +38,15 @@ public class CommentApiController {
         return ResponseEntity.status(HttpStatus.OK).body(createdDto);
     }
 
-
     // 댓글 수정
+    @PatchMapping("/api/comments/{id}")
+    public ResponseEntity<CommentDto> update(@PathVariable Long id,
+                                             @RequestBody CommentDto dto) {
+        // 서비스에게 위임
+        CommentDto updateDto = commentService.update(id, dto);
+        // 결과 응답
+        return ResponseEntity.status(HttpStatus.OK).body(updateDto);
+    }
 
     // 댓글 삭제
 }
