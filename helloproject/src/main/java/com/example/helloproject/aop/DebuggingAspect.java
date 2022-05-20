@@ -13,7 +13,10 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class DebuggingAspect {
     // 대상 메소드 선택 : CommentService#create()
-    @Pointcut("execution(* com.example.helloproject.service.CommentService.create(..))")
+    // create 메소드에 대한 로깅
+//    @Pointcut("execution(* com.example.helloproject.service.CommentService.create(..))")
+    // 모든 메소드(*)에 대한 로깅 : 즉, *
+    @Pointcut("execution(* com.example.helloproject.service.CommentService.*(..))")
     private void cut() {}
 
     // 실행 시점 설정 : cut()의 대상이 수행되기 이전
