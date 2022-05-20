@@ -1,5 +1,6 @@
 package com.example.helloproject.api;
 
+import com.example.helloproject.annotation.RunningTime;
 import com.example.helloproject.dto.CommentDto;
 import com.example.helloproject.entity.Comment;
 import com.example.helloproject.service.CommentService;
@@ -49,6 +50,7 @@ public class CommentApiController {
     }
 
     // 댓글 삭제
+    @RunningTime
     @DeleteMapping("/api/comments/{id}")
     public ResponseEntity<CommentDto> delete(@PathVariable Long id) {
         // 서비스에게 위임
