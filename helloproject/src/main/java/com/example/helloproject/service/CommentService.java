@@ -49,6 +49,7 @@ public class CommentService {
 
     @Transactional
     public CommentDto create(Long articleId, CommentDto dto) {
+
         // 게시글 조회 및 예외 발생
         Article article = articleRepository.findById(articleId)
                 .orElseThrow(() -> new IllegalArgumentException("댓글 생성 실패! 대상 게시글이 없습니다."));
@@ -58,6 +59,7 @@ public class CommentService {
         Comment created = commentRepository.save(comment);
         // DTO로 변경하여 반환
         return CommentDto.createCommentDto(created);
+
 }
 
     @Transactional
