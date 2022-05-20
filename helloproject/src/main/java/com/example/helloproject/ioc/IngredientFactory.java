@@ -1,9 +1,12 @@
 package com.example.helloproject.ioc;
 
+import org.springframework.stereotype.Component;
+
+@Component  // 해당 클래스를 객체를 만들고, 이를 IoC 컨테이너에 등록
 public class IngredientFactory {
     public Ingredient get(String menu) {  // get()은 다양한 식재료 반환
         switch (menu) {
-            case "돈까스":
+            case "돈가스":
                 return new Pork("한돈 등심");
             case "스테이크":
                 return new Beef("한우 꽃등심");
