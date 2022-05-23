@@ -16,7 +16,10 @@ public class DebuggingAspect {
     // create 메소드에 대한 로깅
 //    @Pointcut("execution(* com.example.helloproject.service.CommentService.create(..))")
     // 모든 메소드(*)에 대한 로깅 : 즉, *
-    @Pointcut("execution(* com.example.helloproject.service.CommentService.*(..))")
+//    @Pointcut("execution(* com.example.helloproject.service.CommentService.*(..))")
+    // 대상 메소드 선택 : api 패키지의 모든 메소드
+    @Pointcut("execution(* com.example.helloproject.*.*.*(..))")
+
     private void cut() {}
 
     // 실행 시점 설정 : cut()의 대상이 수행되기 이전
